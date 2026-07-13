@@ -74,14 +74,21 @@ document.addEventListener("DOMContentLoaded", () => {
         activityCard.className = "activity-card";
 
         const spotsLeft = details.max_participants - details.participants.length;
+        const participantCount = details.participants.length;
+        const isFull = spotsLeft === 0;
 
         activityCard.innerHTML = `
-          <h4>${name}</h4>
+          <div class="activity-card-header">
+            <h4>${name}</h4>
+            <span class="participant-count-badge ${isFull ? 'badge-full' : ''}" title="${participantCount} of ${details.max_participants} spots filled">
+              ${participantCount}/${details.max_participants}
+            </span>
+          </div>
           <p>${details.description}</p>
           <p><strong>Schedule:</strong> ${details.schedule}</p>
-          <p><strong>Availability:</strong> ${spotsLeft} spots left</p>
+          <p><strong>Availability:</strong> ${isFull ? '<span class="spots-full">Full</span>' : `${spotsLeft} spots left`}</p>
           <div class="participants-section">
-            <p class="participants-heading"><strong>Participants:</strong></p>
+            <p class="participants-heading"><strong>Participants (${participantCount}):</strong></p>
             ${buildParticipantsList(name, details.participants)}
           </div>
         `;
