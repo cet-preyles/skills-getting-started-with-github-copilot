@@ -65,9 +65,38 @@ section h3 {
   background-color: #f9f9f9;
 }
 
-.activity-card h4 {
+.activity-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin-bottom: 10px;
+}
+
+.activity-card-header h4 {
   color: #0066cc;
+  margin: 0;
+}
+
+.participant-count-badge {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background-color: #e8f0fe;
+  color: #1a237e;
+  border: 1px solid #c5cae9;
+  white-space: nowrap;
+}
+
+.participant-count-badge.badge-full {
+  background-color: #fce4ec;
+  color: #880e4f;
+  border-color: #f48fb1;
+}
+
+.spots-full {
+  color: #b42318;
+  font-weight: 700;
 }
 
 .activity-card p {
