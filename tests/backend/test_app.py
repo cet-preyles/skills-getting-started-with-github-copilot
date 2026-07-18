@@ -3,12 +3,15 @@ Tests for the Mergington High School Activity Registration API.
 Uses the AAA (Arrange-Act-Assert) pattern.
 """
 
+from pathlib import Path
+import sys
+
 import pytest
 from fastapi.testclient import TestClient
-import sys
-import os
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
+ROOT_DIR = Path(__file__).resolve().parents[2]
+SRC_DIR = ROOT_DIR / "src"
+sys.path.insert(0, str(SRC_DIR))
 
 from app import app, activities
 
@@ -30,21 +33,30 @@ client = TestClient(app)
 
 class TestGetActivities:
     def test_get_activities_returns_200(self):
-        # Arrange & Act
+        # Arrange
+        # No setup required.
+
+        # Act
         response = client.get("/activities")
 
         # Assert
         assert response.status_code == 200
 
     def test_get_activities_returns_dict(self):
-        # Arrange & Act
+        # Arrange
+        # No setup required.
+
+        # Act
         response = client.get("/activities")
 
         # Assert
         assert isinstance(response.json(), dict)
 
     def test_get_activities_contains_expected_keys(self):
-        # Arrange & Act
+        # Arrange
+        # No setup required.
+
+        # Act
         response = client.get("/activities")
         data = response.json()
 
@@ -89,7 +101,7 @@ class TestSignupForActivity:
     def test_signup_duplicate_registration_rejected(self):
         # Arrange
         activity_name = "Chess Club"
-        email = "michael@mergington.edu"  # already signed up
+        email = "michael@mergington.edu"
 
         # Act
         response = client.post(
